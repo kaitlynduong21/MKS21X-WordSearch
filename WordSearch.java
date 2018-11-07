@@ -1,16 +1,22 @@
 public class WordSearch{
     private char[][]data;
 
-    /**Initialize the grid to the size specified 
+    /**Initialize the grid to the size specified
      *and fill all of the positions with '_'
      *@param row is the starting height of the WordSearch
      *@param col is the starting width of the WordSearch
      */
     public WordSearch(int rows,int cols){
+      data = new char[rows][cols];
     }
 
     /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
+      for (int x = 0; x < data.length; x ++) {
+        for (int y = 0; y < data[x].length; y++) {
+          data[x][y] = "_" ;
+        }
+      }
     }
 
     /**Each row is a new line, there is a space between each letter
@@ -18,6 +24,10 @@ public class WordSearch{
      *separated by newlines.
      */
     public String toString(){
+      String s = "";
+      for (int x = 0; i < data.length; x++) {
+        
+      }
     }
 
 
@@ -29,7 +39,7 @@ public class WordSearch{
      *@param row is the vertical locaiton of where you want the word to start.
      *@param col is the horizontal location of where you want the word to start.
      *@return true when the word is added successfully. When the word doesn't fit,
-     * or there are overlapping letters that do not match, then false is returned 
+     * or there are overlapping letters that do not match, then false is returned
      * and the board is NOT modified.
      */
     public boolean addWordHorizontal(String word,int row, int col){
