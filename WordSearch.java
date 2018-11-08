@@ -56,15 +56,22 @@ public class WordSearch{
         return false;
       }
       int index = 0;
-      for (int i = col; i < col + length; i ++) {
-          if (data[row][i] == '_' || data[row][i] == word.charAt(index)) {
+      int count = 0;
+      for (int x = col; x < col + length; x ++) {
+          if (data[row][x] == '_' || data[row][x] == word.charAt(index)) {
+            count ++;
+            index ++;
+          }
+        }
+        index = 0;
+        if (count == length) {
+          for (int i = col; i < col + length; i ++) {
             data[row][i] = word.charAt(index);
             index++;
           }
-           else {
+        } else {
           return false;
         }
-      }
       return true;
     }
 
@@ -85,15 +92,22 @@ public class WordSearch{
         return false;
       }
       int index = 0;
-      for (int i = row; i < row + length; i ++) {
-          if (data[i][col] == '_' || data[i][col] == word.charAt(index)) {
-            data[i][col] = word.charAt(index);
-            index++;
+      int count = 0;
+      for (int x = row; x < row + length; x ++) {
+          if (data[x][col] == '_' || data[x][col] == word.charAt(index)) {
+            count ++;
+            index ++;
           }
-           else {
-          return false;
         }
-      }
+        index = 0;
+      if (count == length){
+        for (int i = row; i < row + length; i ++) {
+              data[i][col] = word.charAt(index);
+              index++;
+            }
+          } else {
+            return false;
+          }
       return true;
     }
 }
