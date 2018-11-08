@@ -6,7 +6,7 @@ public class Driver {
     System.out.println("should print out 3 by 5 array with underscores");
     System.out.println(testCase.toString());
     System.out.println("\n\n\n");
-    /*System.out.println("Testing addWordHorizontal");
+    System.out.println("Testing addWordHorizontal");
     testCase.addWordHorizontal("hey", 0, 0);
     System.out.println("top row should say hey");
     System.out.println(testCase.toString());
@@ -16,6 +16,7 @@ public class Driver {
     System.out.println(testCase.toString());
     System.out.println(testCase.toString());
     System.out.println("\n\n\n");
+    /*
     System.out.println("testing addWordVertical");
     testCase.addWordVertical("hey", 0, 0);
     System.out.println("first column should say hey");
