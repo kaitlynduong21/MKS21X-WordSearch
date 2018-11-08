@@ -1,5 +1,7 @@
 public class Driver {
   public static void main(String[] args) {
+
+    System.out.println("Tiffany's Driver \n");
     System.out.println("testing Constructor");
     WordSearch testCase = new WordSearch(3, 5);
     System.out.println("should print out 3 by 5 array with underscores");
@@ -30,6 +32,8 @@ public class Driver {
     System.out.println(testCase.toString());
 
     //THEODORE Driver
+
+    System.out.println("\n Theordore's Driver \n");
     WordSearch one = new WordSearch(10,10);
 		System.out.println("Initializing a 11 by 11, WordSearch");
 		System.out.println("Should print out a 10 X 10 array of underscores: ");
@@ -109,6 +113,8 @@ public class Driver {
     System.out.println("\n---------------\n");
 
     //TIMOTHY Driver
+
+    System.out.println("\n Timothy's Driver \n"); 
 
     WordSearch WSe = new WordSearch(6,10);
 
@@ -310,5 +316,37 @@ public class Driver {
     //   _ _ _ _ _ _ _ _ _ _
     //   _ _ _ _ _ _ _ _ _ _
     // */
+
+    // MIHAD DRIVER
+
+
+    System.out.println("\n Mihad's Driver \n");
+
+    WordSearch p1 = new WordSearch(15,15);
+    // Should be 15 by 15 with only underscores
+    System.out.println(p1);
+    // Should return true and add fortnite to the puzzle
+    System.out.println(p1.addWordHorizontal("FORTNITE",1,1));
+    System.out.println(p1);
+    // Should return false and not change the puzzle
+    System.out.println(p1.addWordHorizontal("YEET",1,13));
+    System.out.println(p1);
+    // Should return true and add victory to the puzzle
+    System.out.println(p1.addWordVertical("VICTORY",0,6));
+    System.out.println(p1);
+    // Should return false and not change the puzzle
+    System.out.println(p1.addWordVertical("ROYALE",13,13));
+    System.out.println(p1);
+    // Doing some cool things
+    String[] words = {"YEET", "DAB", "YURR", "TIMBS"};
+    for (int i=0;i<words.length;i++) {
+      System.out.println(p1.addWordHorizontal(words[i],(int)(Math.random()*14),(int)(Math.random()*14)));
+    }
+    System.out.println(p1);
+    String[] words1 = {"CAR", "NICE", "COOL", "THANOS"};
+    for (int i=0;i<words1.length;i++) {
+      System.out.println(p1.addWordVertical(words1[i],(int)(Math.random()*14),(int)(Math.random()*14)));
+    }
+    System.out.println(p1);
   }
 }
