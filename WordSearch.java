@@ -8,6 +8,7 @@ public class WordSearch{
      */
     public WordSearch(int rows,int cols){
       data = new char[rows][cols];
+      clear();
     }
 
     /**Set all values in the WordSearch to underscores'_'*/
@@ -61,7 +62,7 @@ public class WordSearch{
             index++;
           }
            else {
-          throw new IllegalArgumentException();
+          return false;
         }
       }
       return true;

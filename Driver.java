@@ -17,7 +17,6 @@ public class Driver {
     System.out.println(testCase.toString());
     System.out.println(testCase.toString());
     System.out.println("\n\n\n");
-    /*
     System.out.println("testing addWordVertical");
     testCase.addWordVertical("hey", 0, 0);
     System.out.println("first column should say hey");
@@ -29,6 +28,6 @@ public class Driver {
     System.out.println("\n\n\n");
     System.out.println("should have yeh on third column");
     testCase.addWordVertical("yeh", 0, 2);
-    System.out.println(testCase.toString());*/
+    System.out.println(testCase.toString());
   }
 }
