@@ -50,12 +50,18 @@ public class WordSearch{
      * and the board is NOT modified.
      */
     public boolean addWordHorizontal(String word,int row, int col){
-      for (int i = 0; i < word.length(); i ++) {
-        if (row < data.length && col < data[row].length) {
-            data[row][col] = word.charAt(i);
-            col ++;
-          } else {
-          return false;
+      int length = word.length();
+      if (col + length > data[row].length) {
+        return false;
+      }
+      int index = 0;
+      for (int i = col; i < col + length; i ++) {
+          if (data[row][i] == '_' || data[row][i] == word.charAt(index)) {
+            data[row][i] = word.charAt(index);
+            index++;
+          }
+           else {
+          throw new IllegalArgumentException();
         }
       }
       return true;
@@ -72,6 +78,21 @@ public class WordSearch{
      *or there are overlapping letters that do not match, then false is returned.
      *and the board is NOT modified.
      */
-    //public boolean addWordVertical(String word,int row, int col){
-    //}
+    public boolean addWordVertical(String word,int row, int col){
+      int length = word.length();
+      if (row + length > data.length) {
+        return false;
+      }
+      int index = 0;
+      for (int i = row; i < row + length; i ++) {
+          if (data[i][col] == '_' || data[i][col] == word.charAt(index)) {
+            data[i][col] = word.charAt(index);
+            index++;
+          }
+           else {
+          return false;
+        }
+      }
+      return true;
+    }
 }

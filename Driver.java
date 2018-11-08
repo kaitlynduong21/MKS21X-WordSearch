@@ -8,6 +8,7 @@ public class Driver {
     System.out.println("\n\n\n");
     System.out.println("Testing addWordHorizontal");
     testCase.addWordHorizontal("hey", 0, 0);
+    System.out.println(testCase.addWordHorizontal("hey", 0, 0));
     System.out.println("top row should say hey");
     System.out.println(testCase.toString());
     System.out.println("\n\n\n");
