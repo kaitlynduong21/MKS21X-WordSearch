@@ -28,14 +28,14 @@ public class WordSearch{
   public WordSearch( int rows, int cols, String fileName) {
     data = new char[rows][cols];
     randgen = new Random ();
-    //wordsToAdd = fileName;
+    File f  = new File(fileName);
     clear();
   }
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
-    //wordsToAdd = fileName;
-    //randgen = new Random (randseed);
+    File f  = new File(fileName);
+    randgen = new Random(randSeed);
     seed = randSeed;
 
     clear();
