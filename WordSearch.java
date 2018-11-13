@@ -21,8 +21,13 @@ public class WordSearch{
     clear();
   }
 
+  public ArrayList<String> getWordsAdded() {
+    return wordsAdded;
+  }
+
   public WordSearch( int rows, int cols, String fileName) {
     data = new char[rows][cols];
+    randgen = new Random ();
     //wordsToAdd = fileName;
     clear();
   }
@@ -30,7 +35,9 @@ public class WordSearch{
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
     //wordsToAdd = fileName;
+    //randgen = new Random (randseed);
     seed = randSeed;
+
     clear();
   }
 
@@ -59,44 +66,46 @@ public class WordSearch{
         }
       }
     }
+    s = s + "\n Words: " + wordsAdded;
     return s;
   }
 
   public boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
     int length = word.length();
-    int count = 0;
     int x = row;
     int y = col;
-    int index = 0;
     for (int i = 0; i < length; i++) {
-      if (x < 0 || y < 0 || (rowIncrement == 0 && colIncrement == 0)) {
+      if (rowIncrement == 0 && colIncrement == 0) {
         return false;
       }
-      if (x >= data.length || y >= data[row].length) {
+      try {
+      if (data[x][y] != '_' && data[x][y] != word.charAt(i)) {
         return false;
       }
-      if (data[x][y] == '_' || data[x][y] == word.charAt(index)) {
-        count ++;
-        index ++;
-        x += rowIncrement;
-        y += colIncrement;
+    } catch (ArrayIndexOutOfBoundsException e) {
+        return false;
       }
+      x += rowIncrement;
+      y += colIncrement;
     }
-    index = 0;
     y = col;
     x = row;
-    if (count == length){
       for (int i = 0; i < length; i ++) {
-        data[x][y] = word.charAt(index);
-        index++;
+        data[x][y] = word.charAt(i);
         x += rowIncrement;
         y += colIncrement;
       }
       return true;
-    } else {
-      return false;
     }
-  }
+
+/*  private boolean addAllWords() {
+    int row = (randgen % 2);
+    int col = (randgen.nextInt % 2);
+    for (int i = 0; i < wordsToAdd.length; i ++) {
+      addWord(wordsToAdd[i], )
+    }
+    addWord
+  }*/
 
   public boolean addWordHorizontal(String word,int row, int col){
     int length = word.length();
