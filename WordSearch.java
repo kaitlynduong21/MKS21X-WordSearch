@@ -61,7 +61,7 @@ public class WordSearch{
       Scanner in = new Scanner(f);
       while(in.hasNext()){
         String word = in.next();
-        wordsToAdd.add(word);
+        wordsToAdd.add(word.toUpperCase());
       }
     } catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
@@ -104,7 +104,7 @@ public class WordSearch{
     return s;
   }
 
-  private boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
+  public boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
     int x = row;
     int y = col;
     for (int i = 0; i < word.length(); i++) {
@@ -133,13 +133,16 @@ public class WordSearch{
     return true;
   }
 
-  private void addAllWords() {
+  public void addAllWords() {
     for (int i = 0; i < wordsToAdd.size(); i ++) {
+      int index =  Math.abs(randgen.nextInt() % wordsToAdd.size());
+      String word = wordsToAdd.get(index);
       int r = Math.abs(randgen.nextInt() % data.length);
       int c = Math.abs(randgen.nextInt() % data[0].length) ;
       int ri = randgen.nextInt() % 2;
       int ci = randgen.nextInt() % 2;
-      addWord(wordsToAdd.get(i), r, c, ri, ci);
+      word.toUpperCase();
+      addWord(word, r, c, ri, ci);
       i--;
     }
     /*for (int x = 0; x < data.length; x ++) {
