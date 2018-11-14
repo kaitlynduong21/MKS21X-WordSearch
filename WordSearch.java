@@ -3,6 +3,8 @@ import java.io.*; //file, filenotfoundexception
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WordSearch{
   private char[][]data;
@@ -30,15 +32,18 @@ public class WordSearch{
 
   public WordSearch( int rows, int cols, String fileName) {
     data = new char[rows][cols];
+    clear();
     randgen = new Random ();
+    wordsToAdd = new ArrayList<> ();
+    wordsAdded = new ArrayList<> ();
     try {
-    File f  = new File(fileName);
-    Scanner in = new Scanner(f);
-    while(in.hasNext()){
+      File f  = new File(fileName);
+      Scanner in = new Scanner(f);
+      while( in.hasNext()){
         String word = in.next();
         wordsToAdd.add(word);
       }
-      } catch(FileNotFoundException e){
+    } catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
       System.exit(1);
     }
@@ -46,20 +51,23 @@ public class WordSearch{
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
+    clear();
     randgen = new Random(randSeed);
     seed = randSeed;
+    wordsToAdd = new ArrayList<> ();
+    wordsAdded = new ArrayList<> ();
     try {
-    File f  = new File(fileName);
-    Scanner in = new Scanner(f);
-    while(in.hasNext()){
+      File f  = new File(fileName);
+      Scanner in = new Scanner(f);
+      while(in.hasNext()){
         String word = in.next();
         wordsToAdd.add(word);
       }
-      } catch(FileNotFoundException e){
+    } catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
       System.exit(1);
     }
-}
+  }
 
   /**Set all values in the WordSearch to underscores'_'*/
   private void clear(){
@@ -86,7 +94,13 @@ public class WordSearch{
         }
       }
     }
-    s = s + "\n Words: " + wordsAdded;
+    s = s + "\n Words: ";
+    for (int i = 0; i < wordsAdded.size(); i++) {
+      s = s + wordsAdded.get(i);
+      if (i != wordsAdded.size() - 1) {
+        s += ", ";
+      }
+    }
     return s;
   }
 
@@ -98,10 +112,10 @@ public class WordSearch{
         return false;
       }
       try {
-      if (data[x][y] != '_' && data[x][y] != word.charAt(i)) {
-        return false;
-      }
-    } catch (ArrayIndexOutOfBoundsException e) {
+        if (data[x][y] != '_' && data[x][y] != word.charAt(i)) {
+          return false;
+        }
+      } catch (ArrayIndexOutOfBoundsException e) {
         return false;
       }
       x += rowIncrement;
@@ -109,15 +123,17 @@ public class WordSearch{
     }
     y = col;
     x = row;
-      for (int i = 0; i < word.length(); i ++) {
-        data[x][y] = word.charAt(i);
-        x += rowIncrement;
-        y += colIncrement;
-      }
-      return true;
+    for (int i = 0; i < word.length(); i ++) {
+      data[x][y] = word.charAt(i);
+      x += rowIncrement;
+      y += colIncrement;
     }
+    wordsAdded.add(word);
+    wordsToAdd.remove(word);
+    return true;
+  }
 
-private void addAllWords() {
+  public void addAllWords() {
     int k = data.length;
     int r = (randgen.nextInt() % k);
     int c = (randgen.nextInt() % data[0].length);

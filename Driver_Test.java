@@ -5,7 +5,18 @@ public class Driver_Test {
 
   public static void main(String[] args) {
 
-    WordSearch WSe = new WordSearch(10,14,"words.txt");
+    try {
+    File f  = new File("words.txt");
+    Scanner in = new Scanner(f);
+    while(in.hasNext()){
+      String word = in.next();
+      System.out.println(word);
+    }
+  } catch(FileNotFoundException e){
+    System.out.println("File not found: words.txt");
+  }
+
+    WordSearch WSe = new WordSearch(10,14, "words.txt");
 
     System.out.println("WordSearch WSe = new WordSearch(10,14,\"words.txt\")");
     System.out.println(WSe);
