@@ -4,3 +4,5 @@ sushi
 turkey
 venison
 meatloaf
+pizza
+candy

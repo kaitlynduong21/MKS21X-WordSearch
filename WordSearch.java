@@ -134,18 +134,17 @@ public class WordSearch{
   }
 
   public void addAllWords() {
-    int k = data.length;
-    int r = (randgen.nextInt() % k);
-    int c = (randgen.nextInt() % data[0].length);
-    int ri = (randgen.nextInt() % 2);
-    int ci = (randgen.nextInt() % 2);
     for (int i = 0; i < wordsToAdd.size(); i ++) {
+      int r = randgen.nextInt(data.length);
+      int c = randgen.nextInt(data[0].length) ;
+      int ri = randgen.nextInt(2);
+      int ci = randgen.nextInt(2);
       if (addWord(wordsToAdd.get(i), r, c, ri, ci)) {
         addWord(wordsToAdd.get(i), r, c, ri, ci);
       } else {
         for (int x = 0; x < 100; x ++) {
-          int newr = (randgen.nextInt() % k);
-          int newc = (randgen.nextInt() % data[0].length);
+          int newr = randgen.nextInt(data.length);
+          int newc = randgen.nextInt(data[0].length);
           if (addWord(wordsToAdd.get(i), newr, newc, ri, ci)) {
             addWord(wordsToAdd.get(i), newr, newc, ri, ci);
           }
