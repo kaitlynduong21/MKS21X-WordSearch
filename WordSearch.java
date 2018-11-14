@@ -31,20 +31,35 @@ public class WordSearch{
   public WordSearch( int rows, int cols, String fileName) {
     data = new char[rows][cols];
     randgen = new Random ();
+    try {
     File f  = new File(fileName);
     Scanner in = new Scanner(f);
-    clear();
+    while(in.hasNext()){
+        String word = in.next();
+        wordsToAdd.add(word);
+      }
+      } catch(FileNotFoundException e){
+      System.out.println("File not found: " + fileName);
+      System.exit(1);
+    }
   }
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
-    File f  = new File(fileName);
-    Scanner in = new Scanner(f);
     randgen = new Random(randSeed);
     seed = randSeed;
-
-    clear();
-  }
+    try {
+    File f  = new File(fileName);
+    Scanner in = new Scanner(f);
+    while(in.hasNext()){
+        String word = in.next();
+        wordsToAdd.add(word);
+      }
+      } catch(FileNotFoundException e){
+      System.out.println("File not found: " + fileName);
+      System.exit(1);
+    }
+}
 
   /**Set all values in the WordSearch to underscores'_'*/
   private void clear(){
