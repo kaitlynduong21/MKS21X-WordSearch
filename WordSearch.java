@@ -1,5 +1,8 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class WordSearch{
   private char[][]data;
@@ -29,12 +32,14 @@ public class WordSearch{
     data = new char[rows][cols];
     randgen = new Random ();
     File f  = new File(fileName);
+    Scanner in = new Scanner(f);
     clear();
   }
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
     File f  = new File(fileName);
+    Scanner in = new Scanner(f);
     randgen = new Random(randSeed);
     seed = randSeed;
 
@@ -71,10 +76,9 @@ public class WordSearch{
   }
 
   public boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
-    int length = word.length();
     int x = row;
     int y = col;
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < word.length(); i++) {
       if (rowIncrement == 0 && colIncrement == 0) {
         return false;
       }
@@ -90,7 +94,7 @@ public class WordSearch{
     }
     y = col;
     x = row;
-      for (int i = 0; i < length; i ++) {
+      for (int i = 0; i < word.length(); i ++) {
         data[x][y] = word.charAt(i);
         x += rowIncrement;
         y += colIncrement;
@@ -98,14 +102,26 @@ public class WordSearch{
       return true;
     }
 
-/*  private boolean addAllWords() {
-    int row = (randgen % 2);
-    int col = (randgen.nextInt % 2);
-    for (int i = 0; i < wordsToAdd.length; i ++) {
-      addWord(wordsToAdd[i], )
+private void addAllWords() {
+    int k = data.length;
+    int r = (randgen.nextInt() % k);
+    int c = (randgen.nextInt() % data[0].length);
+    int ri = (randgen.nextInt() % 2);
+    int ci = (randgen.nextInt() % 2);
+    for (int i = 0; i < wordsToAdd.size(); i ++) {
+      if (addWord(wordsToAdd.get(i), r, c, ri, ci)) {
+        addWord(wordsToAdd.get(i), r, c, ri, ci);
+      } else {
+        for (int x = 0; x < 100; x ++) {
+          int newr = (randgen.nextInt() % k);
+          int newc = (randgen.nextInt() % data[0].length);
+          if (addWord(wordsToAdd.get(i), newr, newc, ri, ci)) {
+            addWord(wordsToAdd.get(i), newr, newc, ri, ci);
+          }
+        }
+      }
     }
-    addWord
-  }*/
+  }
 
   public boolean addWordHorizontal(String word,int row, int col){
     int length = word.length();
