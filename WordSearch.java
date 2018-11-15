@@ -9,6 +9,8 @@ import java.util.List;
 public class WordSearch{
   private char[][]data;
 
+  private char[][]key;
+
   //the random seed used to produce this WordSearch
   private int seed;
 
@@ -32,7 +34,7 @@ public class WordSearch{
 
   public WordSearch( int rows, int cols, String fileName) {
     data = new char[rows][cols];
-    char[][] key = new char [rows][cols];
+    key = new char [rows][cols];
     clear();
     randgen = new Random ();
     wordsToAdd = new ArrayList<> ();
@@ -52,6 +54,7 @@ public class WordSearch{
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
     data = new char[rows][cols];
+    key = new char [rows][cols];
     clear();
     randgen = new Random(randSeed);
     seed = randSeed;
@@ -105,6 +108,37 @@ public class WordSearch{
     return s;
   }
 
+  public String getKey(){
+    String s = "";
+    for (int x = 0; x < data.length; x++) {
+      s += "|";
+      for (int y = 0; y < data[x].length; y++) {
+        if (y != data[x].length - 1) {
+          if (data[x][y] == '_') {
+            s += "  ";
+          } else {
+          s = s + data[x][y] + " ";
+        }
+      } else {
+          if (data[x][y] == '_') {
+            s += " | \n";
+          } else {
+          s = s + data[x][y] + "|\n";
+        }
+      }
+    }
+  }
+    s = s + "\n Words: ";
+    for (int i = 0; i < wordsAdded.size(); i++) {
+      s = s + wordsAdded.get(i);
+      if (i != wordsAdded.size() - 1) {
+        s += ", ";
+      }
+    }
+    s = s + " (seed: " + seed + ")";
+    return s;
+}
+
   public boolean addWord(String word,int row, int col, int rowIncrement, int colIncrement){
     int x = row;
     int y = col;
@@ -142,7 +176,15 @@ public class WordSearch{
       int c = Math.abs(randgen.nextInt() % data[0].length) ;
       int ri = randgen.nextInt() % 2;
       int ci = randgen.nextInt() % 2;
-      addWord(word, r, c, ri, ci);
+      if (addWord(word, r, c, ri, ci)) {
+        addWord(word, r, c, ri, ci);
+        wordsAdded.remove(word);
+        for (int x = 0; x < word.length(); x ++) {
+          key[r][c] = word.charAt(x);
+          r += ri;
+          c += ci;
+        }
+      }
       i--;
     }
     /*for (int x = 0; x < data.length; x ++) {

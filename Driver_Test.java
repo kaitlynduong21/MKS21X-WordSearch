@@ -848,7 +848,7 @@ public class Driver_Test {
     */
 
     if(args.length >= 2) {
-      WordSearch WSe2 = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),"words.txt",Integer.parseInt(args[3]));
+      WordSearch WSe2 = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]), args[2] ,Integer.parseInt(args[3]));
 
       System.out.println("WordSearch WSe2 = new WordSearch(args[0],args[1],\"words.txt\")");
       System.out.println(WSe2);

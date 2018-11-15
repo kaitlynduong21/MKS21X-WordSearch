@@ -1,7 +1,7 @@
 public class Driver {
   public static void main(String[] args) {
 
-    System.out.println("Tiffany's Driver \n");
+    /*System.out.println("Tiffany's Driver \n");
     System.out.println("testing Constructor");
     WordSearch testCase = new WordSearch(3, 5);
     System.out.println("should print out 3 by 5 array with underscores");
@@ -111,364 +111,55 @@ public class Driver {
     System.out.println("Adding \"abc\" to last 3 slots of each column (should print true, once): " + (SW.addWordVertical("abc",2,0) && SW.addWordVertical("abc",2,1) && SW.addWordVertical("abc",2,2) && SW.addWordVertical("abc",2,3) && SW.addWordVertical("abc",2,4)));
     System.out.println("\nPrinting WS (see above description)\n" + SW);
     System.out.println("\n---------------\n");
+*/
+if(args.length >= 2) {
+  WordSearch WSe2 = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]), args[2] ,Integer.parseInt(args[3]));
 
-    //TIMOTHY Driver
+  System.out.println("WordSearch WSe2 = new WordSearch(args[0],args[1],\"words.txt\")");
+  System.out.println(WSe2);
+  /*
+    example:
+    java Driver_Test 10 12
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
+    |_ _ _ _ _ _ _ _ _ _ _ _|
 
-    WordSearch WSe = new WordSearch(6,10);
+    example:
+    java Driver_Test 3 5
+    |_ _ _ _ _|
+    |_ _ _ _ _|
+    |_ _ _ _ _|
 
-    System.out.println("WordSearch WSe = new WordSearch(6,10)");
-    System.out.println(WSe);
-    /*
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
+    example:
+    java Driver_Test 6 6
+    |_ _ _ _ _ _|
+    |_ _ _ _ _ _|
+    |_ _ _ _ _ _|
+    |_ _ _ _ _ _|
+    |_ _ _ _ _ _|
+    |_ _ _ _ _ _|
+  */
 
-    System.out.println();
+  WSe2.addAllWords();
+//System.out.println(WSe2);
+  System.out.println(WSe2.getKey());
+  // hopefully filled WordSearch
 
-    System.out.println("WSe.addWordHorizontal(\"CLOUD\",0,7)");
-    if(WSe.addWordHorizontal("CLOUD",0,7)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure.
-    // should fail, CLOUD is outside of bounds
+} else if(args.length == 1) {
+  System.out.println("MISSING INPUT:\nDriver_Test class needs terminal line args:");
+  System.out.println("- int rows [FOUND]\n- int cols [NOT FOUND]");
 
-    System.out.println(WSe);
-    /*
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
+} else if(args.length == 0) {
+  System.out.println("MISSING INPUT:\nDriver_Test class needs terminal line args:");
+  System.out.println("- int rows [NOT FOUND]\n- int cols [NOT FOUND]");
 
-    System.out.println();
-
-    System.out.println("WSe.addWordHorizontal(\"TIFA\",0,5)");
-    if(WSe.addWordHorizontal("TIFA",0,5)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success.
-    // should succeed, TIFA is within bounds, no destructive interference
-
-    System.out.println(WSe);
-    /*
-      _ _ _ _ _ T I F A _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
-
-    System.out.println("WSe.addWordHorizontal(\"REDXIII\",0,2)");
-    if(WSe.addWordHorizontal("REDXIII",0,2)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure.
-    // should fail, REDXIII is within bounds, yes destructive interference
-
-    System.out.println(WSe);
-    /*
-      _ _ _ _ _ T I F A _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
-
-    System.out.println("WSe.addWordHorizontal(\"REDXIII\",1,0)");
-    if(WSe.addWordHorizontal("REDXIII",1,0)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success.
-    // should succeed, REDXIII is within bounds, no destructive interference
-
-    System.out.println(WSe);
-    /*
-      _ _ _ _ _ T I F A _
-      R E D X I I I _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
-
-    System.out.println("WSe.addWordHorizontal(\"BARRET\",0,0)");
-    if(WSe.addWordHorizontal("BARRET",0,0)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success.
-    // should succeed, BARRET is within bounds, only constructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-      _ _ _ _ _ _ _ _ _ _
-    */
-
-    System.out.println("WSe.addWordVertical(\"YUFFIE\",2,9)");
-    if(WSe.addWordVertical("YUFFIE",2,9)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure.
-    // should fail, YUFFIE is out of bounds
-
-    System.out.println(WSe);
-    /*
-    B A R R E T I F A _
-    R E D X I I I _ _ _
-    _ _ _ _ _ _ _ _ _ _
-    _ _ _ _ _ _ _ _ _ _
-    _ _ _ _ _ _ _ _ _ _
-    _ _ _ _ _ _ _ _ _ _
-    */
-
-    System.out.println("WSe.addWordVertical(\"CLOUD\",1,9)");
-    if(WSe.addWordVertical("CLOUD",1,9)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success.
-    // should succeed, CLOUD is within bounds, no destructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ _ _ _ _ _ _ _ _ L
-      _ _ _ _ _ _ _ _ _ O
-      _ _ _ _ _ _ _ _ _ U
-      _ _ _ _ _ _ _ _ _ D
-    */
-
-    System.out.println("WSe.addWordVertical(\"YUFFIE\",0,9)");
-    if(WSe.addWordVertical("YUFFIE",0,9)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure.
-    // should fail, YUFFIE is within bounds, yes destructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ _ _ _ _ _ _ _ _ L
-      _ _ _ _ _ _ _ _ _ O
-      _ _ _ _ _ _ _ _ _ U
-      _ _ _ _ _ _ _ _ _ D
-    */
-
-    System.out.println("WSe.addWordVertical(\"AERITH\",0,1)");
-    if(WSe.addWordVertical("AERITH",0,1)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success.
-    // should succeed, AERITH is within bounds, only constructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R _ _ _ _ _ _ _ L
-      _ I _ _ _ _ _ _ _ O
-      _ T _ _ _ _ _ _ _ U
-      _ H _ _ _ _ _ _ _ D
-    */
-
-    System.out.println("WSe.addWordDiagonal(\"CAIT\",3,2)");
-    if(WSe.addWordDiagonal("CAIT",3,2)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure.
-    // should fail, CAIT is out of bounds
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R _ _ _ _ _ _ _ L
-      _ I _ _ _ _ _ _ _ O
-      _ T _ _ _ _ _ _ _ U
-      _ H _ _ _ _ _ _ _ D
-    */
-
-    System.out.println("WSe.addWordDiagonal(\"CAIT\",2,2)");
-    if(WSe.addWordDiagonal("CAIT",2,2)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success
-    // should succeed, CAIT is within bounds, no destructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R C _ _ _ _ _ _ L
-      _ I _ A _ _ _ _ _ O
-      _ T _ _ I _ _ _ _ U
-      _ H _ _ _ T _ _ _ D
-    */
-
-    System.out.println("WSe.addWordDiagonal(\"SITH\",2,3)");
-    if(WSe.addWordDiagonal("SITH",2,3)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success
-    // should succeed, SITH is within bounds, no destructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R C S _ _ _ _ _ L
-      _ I _ A I _ _ _ _ O
-      _ T _ _ I T _ _ _ U
-      _ H _ _ _ T H _ _ D
-    */
-
-    System.out.println("WSe.addWordDiagonal(\"CAIT\",2,0)");
-    if(WSe.addWordDiagonal("CAIT",2,0)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - FAIL");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - PASS");
-    }
-    // > addition failure
-    // should fail, CAIT is within bounds, yes destructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R C S _ _ _ _ _ L
-      _ I _ A I _ _ _ _ O
-      _ T _ _ I T _ _ _ U
-      _ H _ _ _ T H _ _ D
-    */
-
-    System.out.println("WSe.addWordDiagonal(\"TIFA\",0,5)");
-    if(WSe.addWordDiagonal("TIFA",0,5)) {
-      System.out.println("> addition success.");
-      System.out.println("> TEST CASE - PASS");
-    } else {
-      System.out.println("> addition failure.");
-      System.out.println("> TEST CASE - FAIL");
-    }
-    // > addition success
-    // should succeed, TIFA is within bounds, only constructive interference
-
-    System.out.println(WSe);
-    /*
-      B A R R E T I F A _
-      R E D X I I I _ _ C
-      _ R C S _ _ _ F _ L
-      _ I _ A I _ _ _ A O
-      _ T _ _ I T _ _ _ U
-      _ H _ _ _ T H _ _ D
-    */
-
-    // System.out.println("WSe.clear()");
-    // WSe.clear();
-    //
-    // System.out.println(WSe);
-    // /*
-    //   _ _ _ _ _ _ _ _ _ _
-    //   _ _ _ _ _ _ _ _ _ _
-    //   _ _ _ _ _ _ _ _ _ _
-    //   _ _ _ _ _ _ _ _ _ _
-    //   _ _ _ _ _ _ _ _ _ _
-    //   _ _ _ _ _ _ _ _ _ _
-    // */
-
-
-    // MIHAD DRIVER
-
-
-    System.out.println("\n Mihad's Driver \n");
-
-    WordSearch p1 = new WordSearch(15,15);
-    // Should be 15 by 15 with only underscores
-    System.out.println(p1);
-    // Should return true and add fortnite to the puzzle
-    System.out.println(p1.addWordHorizontal("FORTNITE",1,1));
-    System.out.println(p1);
-    // Should return false and not change the puzzle
-    System.out.println(p1.addWordHorizontal("YEET",1,13));
-    System.out.println(p1);
-    // Should return true and add victory to the puzzle
-    System.out.println(p1.addWordVertical("VICTORY",0,6));
-    System.out.println(p1);
-    // Should return false and not change the puzzle
-    System.out.println(p1.addWordVertical("ROYALE",13,13));
-    System.out.println(p1);
-    // Doing some cool things
-    String[] words = {"YEET", "DAB", "YURR", "TIMBS"};
-    for (int i=0;i<words.length;i++) {
-      System.out.println(p1.addWordHorizontal(words[i],(int)(Math.random()*14),(int)(Math.random()*14)));
-    }
-    System.out.println(p1);
-    String[] words1 = {"CAR", "NICE", "COOL", "THANOS"};
-    for (int i=0;i<words1.length;i++) {
-      System.out.println(p1.addWordVertical(words1[i],(int)(Math.random()*14),(int)(Math.random()*14)));
-    }
-    System.out.println(p1);
+}
   }
 }
