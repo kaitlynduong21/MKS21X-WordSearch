@@ -32,6 +32,7 @@ public class WordSearch{
     data = new char[rows][cols];
     key = new char [rows][cols];
     clear();
+    clearKey();
     randgen = new Random ();
     wordsToAdd = new ArrayList<> ();
     wordsAdded = new ArrayList<> ();
@@ -52,6 +53,7 @@ public class WordSearch{
     data = new char[rows][cols];
     key = new char [rows][cols];
     clear();
+    clearKey();
     randgen = new Random(randSeed);
     seed = randSeed;
     wordsToAdd = new ArrayList<> ();
@@ -73,6 +75,14 @@ public class WordSearch{
     for (int x = 0; x < data.length; x ++) {
       for (int y = 0; y < data[x].length; y++) {
         data[x][y] = '_' ;
+      }
+    }
+  }
+
+  private void clearKey(){
+    for (int x = 0; x < key.length; x ++) {
+      for (int y = 0; y < key[x].length; y++) {
+        key[x][y] = '_' ;
       }
     }
   }
@@ -102,20 +112,20 @@ public class WordSearch{
 
   public String getKey(){
     String s = "";
-    for (int x = 0; x < data.length; x++) {
+    for (int x = 0; x < key.length; x++) {
       s += "|";
-      for (int y = 0; y < data[x].length; y++) {
-        if (y != data[x].length - 1) {
-          if (data[x][y] == '_') {
+      for (int y = 0; y < key[x].length; y++) {
+        if (y != key[x].length - 1) {
+          if (key[x][y] == '_') {
             s += "  ";
           } else {
-            s = s + data[x][y] + " ";
+            s = s + key[x][y] + " ";
           }
         } else {
           if (data[x][y] == '_') {
-            s += " | \n";
+            s += "  | \n";
           } else {
-            s = s + data[x][y] + "|\n";
+            s = s + key[x][y] + "|\n";
           }
         }
       }
@@ -179,6 +189,17 @@ public class WordSearch{
       }
       i--;
     }
+    fillLetters();
+  }
+
+    public void fillLetters() {
+      for (int x = 0; x < data.length; x ++) {
+        for (int y = 0;  y < data[x].length; y ++) {
+      if (data[x][y] == '_') {
+        String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        data[x][y] = s.charAt(Math.abs(randgen.nextInt() % 26));
+      }
+    }
     /*for (int x = 0; x < data.length; x ++) {
       for (int y = 0;  y < data[x].length; y ++) {
         if (data[x][y] == '_') {
@@ -187,6 +208,7 @@ public class WordSearch{
       }
     }*/
   }
+}
 
   /*public boolean addWordHorizontal(String word,int row, int col){
     int length = word.length();
