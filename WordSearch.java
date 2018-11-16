@@ -122,10 +122,10 @@ public class WordSearch{
             s = s + key[x][y] + " ";
           }
         } else {
-          if (data[x][y] == '_') {
+          if (key[x][y] == '_') {
             s += "  | \n";
           } else {
-            s = s + key[x][y] + "|\n";
+            s = s + key[x][y] + " |\n";
           }
         }
       }
