@@ -193,22 +193,22 @@ public class WordSearch{
   }
 
     public void fillLetters() {
-      for (int x = 0; x < data.length; x ++) {
+      /*for (int x = 0; x < data.length; x ++) {
         for (int y = 0;  y < data[x].length; y ++) {
       if (data[x][y] == '_') {
         String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         data[x][y] = s.charAt(Math.abs(randgen.nextInt() % 26));
       }
-    }
-    /*for (int x = 0; x < data.length; x ++) {
+    }*/
+    for (int x = 0; x < data.length; x ++) {
       for (int y = 0;  y < data[x].length; y ++) {
         if (data[x][y] == '_') {
-          data[x][y] = ('A'  Math.abs(randgen.nextInt() % 26));
+          int n = 'A' + Math.abs(randgen.nextInt() % 26);
+          data[x][y] = (char)n;
         }
       }
-    }*/
+    }
   }
-}
 
   /*public boolean addWordHorizontal(String word,int row, int col){
     int length = word.length();
