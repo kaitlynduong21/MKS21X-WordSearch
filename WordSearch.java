@@ -96,6 +96,7 @@ public class WordSearch{
         s += ", ";
       }
     }
+    s = s + " (seed: " + seed + ")";
     return s;
   }
 
@@ -266,30 +267,16 @@ public class WordSearch{
     return true;
   }*/
 
-  public nonstatic void main (String[]args) {
-    data = new char[args[0]][args[1]];
-    key = new char [args[0]][args[1]];
-    clear();
-    wordsToAdd = new ArrayList<> ();
-    wordsAdded = new ArrayList<> ();
-    try {
-      File f  = new File(args[2]);
-      Scanner in = new Scanner(f);
-      while( in.hasNext()){
-        String word = in.next();
-        wordsToAdd.add(word.toUpperCase());
-      }
-    } catch(FileNotFoundException e){
-      System.out.println("File not found: " + args[2]);
-      System.exit(1);
+  public static void main (String[]args) {
+
+    WordSearch term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+    if (args.length >= 4) {
+      term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
     }
-    randgen = new Random ();
-    if (args == 4) {
-      randgen = new Random(randSeed);
-      seed = randSeed;
-    }
-    if (args == 5 && args[4].equals("key")) {
-      getKey();
+    term.addAllWords();
+    System.out.println(term);
+    if (args.length == 5 && args[4].equals("key")) {
+      System.out.println(term.getKey());
     }
   }
 
