@@ -29,6 +29,10 @@ public class WordSearch{
   }
 
   public WordSearch( int rows, int cols, String fileName) {
+    if (rows < 0 || cols < 0) {
+      System.out.println("Cannot run the program with negative arguments.");
+      System.exit (1);
+    }
     data = new char[rows][cols];
     key = new char [rows][cols];
     clear();
@@ -50,10 +54,18 @@ public class WordSearch{
   }
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
+    if (rows < 0 || cols < 0) {
+      System.out.println("Cannot run the program with negative arguments. Change rows and or columns to positive integers.");
+      System.exit (1);
+    }
     data = new char[rows][cols];
     key = new char [rows][cols];
     clear();
     clearKey();
+    if (randSeed < 0 || randSeed > 10001) {
+      System.out.println("Seed cannot be less than 0 or greater than 10000. Change seed to fit within this interval.");
+      System.exit (1);
+    }
     randgen = new Random(randSeed);
     seed = randSeed;
     wordsToAdd = new ArrayList<> ();
@@ -106,7 +118,11 @@ public class WordSearch{
         s += ", ";
       }
     }
+    if (seed > 0) {
     s = s + " (seed: " + seed + ")";
+  } else {
+    s = s + " (seed not given)";
+  }
     return s;
   }
 
@@ -192,14 +208,7 @@ public class WordSearch{
     fillLetters();
   }
 
-    public void fillLetters() {
-      /*for (int x = 0; x < data.length; x ++) {
-        for (int y = 0;  y < data[x].length; y ++) {
-      if (data[x][y] == '_') {
-        String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        data[x][y] = s.charAt(Math.abs(randgen.nextInt() % 26));
-      }
-    }*/
+  public void fillLetters() {
     for (int x = 0; x < data.length; x ++) {
       for (int y = 0;  y < data[x].length; y ++) {
         if (data[x][y] == '_') {
@@ -210,96 +219,100 @@ public class WordSearch{
     }
   }
 
+
   /*public boolean addWordHorizontal(String word,int row, int col){
-    int length = word.length();
-    if (row < 0 || col < 0 || row > data.length || col > data[row].length || col + length > data[row].length) {
-      return false;
-    }
-    int index = 0;
-    int count = 0;
-    for (int x = col; x < col + length; x ++) {
-      if (data[row][x] == '_' || data[row][x] == word.charAt(index)) {
-        count ++;
-        index ++;
-      }
-    }
-    index = 0;
-    if (count == length) {
-      for (int i = col; i < col + length; i ++) {
-        data[row][i] = word.charAt(index);
-        index++;
-      }
-    } else {
-      return false;
-    }
-    return true;
+  int length = word.length();
+  if (row < 0 || col < 0 || row > data.length || col > data[row].length || col + length > data[row].length) {
+  return false;
+}
+int index = 0;
+int count = 0;
+for (int x = col; x < col + length; x ++) {
+if (data[row][x] == '_' || data[row][x] == word.charAt(index)) {
+count ++;
+index ++;
+}
+}
+index = 0;
+if (count == length) {
+for (int i = col; i < col + length; i ++) {
+data[row][i] = word.charAt(index);
+index++;
+}
+} else {
+return false;
+}
+return true;
+}
+
+public boolean addWordVertical(String word,int row, int col){
+int length = word.length();
+if (row < 0 || col < 0 || row > data.length || col > data[row].length || row + length > data.length) {
+return false;
+}
+int index = 0;
+int count = 0;
+for (int x = row; x < row + length; x ++) {
+if (data[x][col] == '_' || data[x][col] == word.charAt(index)) {
+count ++;
+index ++;
+}
+}
+index = 0;
+if (count == length){
+for (int i = row; i < row + length; i ++) {
+data[i][col] = word.charAt(index);
+index++;
+}
+} else {
+return false;
+}
+return true;
+}
+
+public boolean addWordDiagonal(String word,int row, int col){
+int length = word.length();
+if (row < 0 || col < 0 || row > data.length || col > data[row].length || row + length > data.length || col + length > data[row].length) {
+return false;
+}
+int index = 0;
+int count = 0;
+int y = col;
+for (int x = row; x < row + length; x ++) {
+if (data[x][y] == '_' || data[x][y] == word.charAt(index)) {
+count ++;
+index ++;
+y++;
+}
+}
+index = 0;
+y = col;
+if (count == length){
+for (int i = row; i < row + length; i ++) {
+data[i][y] = word.charAt(index);
+index++;
+y++;
+}
+} else {
+return false;
+}
+return true;
+}*/
+
+public static void main (String[]args) {
+
+  if (args.length < 3) {
+    System.out.println("There is not enough arguments to run the program. Add " + (3 - args.length) + " more argument to run progam.");
+    System.exit(1);
   }
-
-  public boolean addWordVertical(String word,int row, int col){
-    int length = word.length();
-    if (row < 0 || col < 0 || row > data.length || col > data[row].length || row + length > data.length) {
-      return false;
-    }
-    int index = 0;
-    int count = 0;
-    for (int x = row; x < row + length; x ++) {
-      if (data[x][col] == '_' || data[x][col] == word.charAt(index)) {
-        count ++;
-        index ++;
-      }
-    }
-    index = 0;
-    if (count == length){
-      for (int i = row; i < row + length; i ++) {
-        data[i][col] = word.charAt(index);
-        index++;
-      }
-    } else {
-      return false;
-    }
-    return true;
+  WordSearch term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+  if (args.length >= 4) {
+    term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
   }
-
-  public boolean addWordDiagonal(String word,int row, int col){
-    int length = word.length();
-    if (row < 0 || col < 0 || row > data.length || col > data[row].length || row + length > data.length || col + length > data[row].length) {
-      return false;
-    }
-    int index = 0;
-    int count = 0;
-    int y = col;
-    for (int x = row; x < row + length; x ++) {
-      if (data[x][y] == '_' || data[x][y] == word.charAt(index)) {
-        count ++;
-        index ++;
-        y++;
-      }
-    }
-    index = 0;
-    y = col;
-    if (count == length){
-      for (int i = row; i < row + length; i ++) {
-        data[i][y] = word.charAt(index);
-        index++;
-        y++;
-      }
-    } else {
-      return false;
-    }
-    return true;
-  }*/
-
-  public static void main (String[]args) {
-
-    WordSearch term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
-    if (args.length >= 4) {
-      term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-    }
-    term.addAllWords();
-    System.out.println(term);
-    if (args.length == 5 && args[4].equals("key")) {
-      System.out.println(term.getKey());
-    }
+  term.addAllWords();
+  System.out.println(term);
+  if (args.length == 5 && args[4].equals("key")) {
+    System.out.println(term.getKey());
   }
-
+}
 }
