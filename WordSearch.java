@@ -65,7 +65,7 @@ public class WordSearch{
     clear();
     clearKey();
     if (randSeed < 0 || randSeed > 10000) {
-      System.out.println("Seed is out of range. Pick a seed between 1 and 10000 inclusive.");
+      System.out.println("Seed is out of range. Pick a seed between 0 and 10000 inclusive.");
       System.exit (1);
     }
     randgen = new Random(randSeed);
