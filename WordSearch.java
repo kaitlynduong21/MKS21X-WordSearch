@@ -37,7 +37,9 @@ public class WordSearch{
     key = new char [rows][cols];
     clear();
     clearKey();
-    randgen = new Random ();
+    Random randSeed = new Random ();
+    seed = Math.abs((randSeed.nextInt() % 10000));
+    randgen = new Random(seed);
     wordsToAdd = new ArrayList<> ();
     wordsAdded = new ArrayList<> ();
     try {
@@ -118,11 +120,7 @@ public class WordSearch{
         s += ", ";
       }
     }
-    if (seed > 0) {
     s = s + " (seed: " + seed + ")";
-  } else {
-    s = s + " (seed not given)";
-  }
     return s;
   }
 
