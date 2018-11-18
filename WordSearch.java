@@ -62,8 +62,8 @@ public class WordSearch{
     key = new char [rows][cols];
     clear();
     clearKey();
-    if (randSeed < 0 || randSeed > 10001) {
-      System.out.println("Seed cannot be less than 0 or greater than 10000. Change seed to fit within this interval.");
+    if (randSeed < 0 || randSeed > 10000) {
+      System.out.println("Seed is out of range. Pick a seed between 1 and 10000 inclusive.");
       System.exit (1);
     }
     randgen = new Random(randSeed);
@@ -305,9 +305,15 @@ public static void main (String[]args) {
     System.out.println("There is not enough arguments to run the program. Add " + (3 - args.length) + " more argument to run progam.");
     System.exit(1);
   }
-  WordSearch term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+  WordSearch term;
+  term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
   if (args.length >= 4) {
-    term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+    try {
+      term = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+  } catch (NumberFormatException e) {
+    System.out.println("Seed can only be an integer.");
+    System.exit(1);
+  }
   }
   term.addAllWords();
   System.out.println(term);
