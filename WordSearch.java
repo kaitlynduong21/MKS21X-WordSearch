@@ -33,10 +33,6 @@ public class WordSearch{
       System.out.println("Cannot run the program with negative arguments.");
       System.exit (1);
     }
-    data = new char[rows][cols];
-    key = new char [rows][cols];
-    clear();
-    clearKey();
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
     randgen = new Random(seed);
@@ -53,6 +49,11 @@ public class WordSearch{
       System.out.println("File not found: " + fileName);
       System.exit(1);
     }
+    data = new char[rows][cols];
+    key = new char [rows][cols];
+    clear();
+    clearKey();
+    addAllWords();
   }
 
   public WordSearch( int rows, int cols, String fileName, int randSeed) {
@@ -83,6 +84,7 @@ public class WordSearch{
       System.out.println("File not found: " + fileName);
       System.exit(1);
     }
+    addAllWords();
   }
 
   private void clear(){
