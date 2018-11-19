@@ -315,7 +315,6 @@ public static void main (String[]args) {
     System.exit(1);
   }
   }
-  term.addAllWords();
   System.out.println(term);
   if (args.length == 5 && args[4].equals("key")) {
     System.out.println(term.getKey());
