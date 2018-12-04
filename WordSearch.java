@@ -190,23 +190,33 @@ public class WordSearch{
     for (int i = 0; i < wordsToAdd.size(); i ++) {
       int index =  Math.abs(randgen.nextInt() % wordsToAdd.size());
       String word = wordsToAdd.get(index);
-      int r = Math.abs(randgen.nextInt() % data.length);
-      int c = Math.abs(randgen.nextInt() % data[0].length) ;
-      int ri = randgen.nextInt() % 2;
-      int ci = randgen.nextInt() % 2;
-      if (addWord(word, r, c, ri, ci)) {
-        addWord(word, r, c, ri, ci);
-        wordsAdded.remove(word);
-        for (int x = 0; x < word.length(); x ++) {
-          key[r][c] = word.charAt(x);
-          r += ri;
-          c += ci;
+      for(int dir = 0; dir < 10; dir ++) {
+        int ri = randgen.nextInt() % 2;
+        int ci = randgen.nextInt() % 2;
+        for (int pos = 0; pos < 500; pos ++) {
+        int r = Math.abs(randgen.nextInt() % data.length);
+        int c = Math.abs(randgen.nextInt() % data[0].length) ;
+          if (addWord(word, r, c, ri, ci)) {
+            addWord(word, r, c, ri, ci);
+            wordsAdded.remove(word);
+            pos = 500;
+            dir = 10;
+            for (int x = 0; x < word.length(); x ++) {
+              key[r][c] = word.charAt(x);
+              r += ri;
+              c += ci;
         }
       }
+    }
+  }
+  if (wordsToAdd.contains(word)) {
+    wordsToAdd.remove(word);
+  }
       i--;
     }
     fillLetters();
   }
+
 
   public void fillLetters() {
     for (int x = 0; x < data.length; x ++) {
@@ -319,5 +329,7 @@ public static void main (String[]args) {
   if (args.length == 5 && args[4].equals("key")) {
     System.out.println(term.getKey());
   }
+  System.out.println(term.wordsToAdd.size());
+  System.out.println(term.wordsAdded.size());
 }
 }
